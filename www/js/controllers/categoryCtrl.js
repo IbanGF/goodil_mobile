@@ -104,4 +104,16 @@ function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
       categoryName: $stateParams.categoryName
     });
   };
+
+  // Go to map view
+
+  $scope.goToMap = function(deal) {
+    console.log(deal);
+    $state.go('tab.mapCategories', {
+      lat: deal.shop.point.coordinates[0],
+      lng: deal.shop.point.coordinates[1]
+    }, {
+      reload: true
+    });
+  };
 }

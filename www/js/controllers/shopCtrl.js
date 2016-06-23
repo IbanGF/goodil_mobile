@@ -110,7 +110,7 @@ function shopCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordova
 
   $scope.goToMap = function(deal) {
     console.log(deal);
-    $state.go('tab.map', {
+    $state.go('tab.mapShops', {
       lat: deal.shop.point.coordinates[0],
       lng: deal.shop.point.coordinates[1]
     }, {

@@ -34,6 +34,16 @@ function routes($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         }
       }
     })
+    .state('tab.mapDeals', {
+      url: '/deals/:lng/:lat',
+      views: {
+        'tab-deals': {
+          cache: false,
+          templateUrl: 'templates/tab-deal-map.html',
+          controller: 'mapCtrl'
+        }
+      }
+    })
     .state('tab.categories', {
       url: '/categories',
       views: {
@@ -58,6 +68,16 @@ function routes($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         'tab-categories': {
           templateUrl: 'templates/tab-category-deal.html',
           controller: 'categoryCtrl'
+        }
+      }
+    })
+    .state('tab.mapCategories', {
+      url: '/categories/:lng/:lat',
+      views: {
+        'tab-categories': {
+          cache: false,
+          templateUrl: 'templates/tab-deal-map.html',
+          controller: 'mapCtrl'
         }
       }
     })
@@ -88,6 +108,16 @@ function routes($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         }
       }
     })
+    .state('tab.mapShops', {
+      url: '/shops/:lng/:lat',
+      views: {
+        'tab-shops': {
+          cache: false,
+          templateUrl: 'templates/tab-deal-map.html',
+          controller: 'mapCtrl'
+        }
+      }
+    })
     .state('tab.favorites', {
       url: '/favorites',
       views: {
@@ -106,10 +136,10 @@ function routes($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         }
       }
     })
-    .state('tab.map', {
-      url: '/deals/:lng/:lat',
+    .state('tab.mapFavorites', {
+      url: '/favorites/:lng/:lat',
       views: {
-        'tab-deals': {
+        'tab-favorites': {
           cache: false,
           templateUrl: 'templates/tab-deal-map.html',
           controller: 'mapCtrl'

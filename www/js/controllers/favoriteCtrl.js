@@ -5,16 +5,6 @@ function favoriteCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
   $scope.favory = true;
   $scope.favories = dealsFactory.favorites;
 
-  $scope.goToMap = function(deal) {
-    console.log(deal);
-    $state.go('tab.map', {
-      lat: deal.shop.point.coordinates[0],
-      lng: deal.shop.point.coordinates[1]
-    }, {
-      reload: true
-    });
-  };
-
   $scope.removeFavorite = function() {
     dealsFactory.favorites.splice(dealsFactory.favorites.indexOf($scope.dealsInShop[$scope.activeIndex]), 1);
   };
@@ -26,7 +16,6 @@ function favoriteCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
   // Slider
 
   $scope.$on("$ionicSlides.sliderInitialized", function(event, data) {
-    // data.slider is the instance of Swiper
     $scope.slider = data.slider;
   });
 
@@ -49,4 +38,16 @@ function favoriteCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
       $scope.$apply();
     });
   }
+
+  // Go to map view
+
+  $scope.goToMap = function(deal) {
+    console.log(deal);
+    $state.go('tab.mapFavorites', {
+      lat: deal.shop.point.coordinates[0],
+      lng: deal.shop.point.coordinates[1]
+    }, {
+      reload: true
+    });
+  };
 }
