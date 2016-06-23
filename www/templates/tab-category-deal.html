@@ -1,0 +1,56 @@
+<ion-view view-title="{{categoryName}}" ng-class="loadingClass">
+
+  <ion-nav-buttons side="secondary">
+    <button class="icon button button-clear" ng-class="{'ion-ios-star' : favory, 'ion-ios-star-outline' : !favory}" ng-click="toggleFavorite()"></button>
+    <button class="icon ion-ios-upload-outline button button-clear" ng-click="shareAnywhere()"></button>
+  </ion-nav-buttons>
+
+  <ion-slides slider="data.slider" show-pager="false" class="deals-slider">
+    <ion-slide-page ng-repeat="deal in dealsInCategory">
+      <div class="deal-detail">
+        <div class="deal-detail-top">
+          <div class="deal-detail-main">
+            <div class="deal-detail-illustration" style="background: url('http://goodil.ibangf.ovh/{{deal.image}}') no-repeat; background-size: contain; background-position: center;" ng-click="openModal()"></div>
+            <div class="deal-detail-description">
+              <h2>{{deal.name}}</h2>
+              <p>{{deal.description}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row deal-detail-bottom">
+
+          <div class="col col-50 col-center">
+            <div class="deal-detail-expiration">
+              Du
+              {{deal.start_date | date:'d MMMM'}}
+              au
+              {{deal.end_date | date:'d MMMM'}}
+            </div>
+            <div class="deal-detail-term">
+              {{deal.term}}
+            </div>
+
+          </div>
+          <div class="col col-20 col-center deal-detail-category-avatar">
+            <div class="half-col">&nbsp;</div>
+            <div class="deal-category-avatar-container">
+              <img class="deal-brand-avatar" ng-src="http://goodil.ibangf.ovh/{{deal.shop.logo}}">
+            </div>
+          </div>
+          <div class="col col-30 col-offset-20 col-center" ng-click="goToMap(deal)">
+            <div class="deal-detail-shop-name">
+              {{deal.shop.name}}
+            </div>
+            <div class="deal-detail-location truncate" ng-click="goToMap(deal)">
+              <i class="icon ion-ios-location-outline"></i><br/>
+              {{deal.shop.address[1]}}<br/>
+              {{deal.shop.address[2]}}<br/>
+              {{deal.shop.address[3]}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-slide-page>
+  </ion-slides>
+
+</ion-view>

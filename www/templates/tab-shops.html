@@ -1,0 +1,30 @@
+<ion-view view-title="Magasins" ng-class="loadingClass">
+  <ion-content>
+    <ion-refresher on-refresh="onRefresh()"></ion-refresher>
+    <p ng-hide="shops.length" class="deals-empty">Aucune offre pour le moment :(</p>
+    <ion-list>
+      <ion-item class="category item-thumbnail-left item-icon-right" ng-repeat="shop in shops" type="item" ng-click="goToTabShop(shop)" href>
+        <div class="row category-row">
+
+          <div class="col col-20 col-center category-col-avatar">
+            <img class="shop-logo-thumbnail" ng-src="http://goodil.ibangf.ovh/{{shop.logo || 'img/missing.png'}}">
+          </div>
+
+          <div class="col col-10 col-center category-half-col-container">
+            <div class="half-col">&nbsp;</div>
+          </div>
+
+          <div class="col col-60 col-offset-10 col-center truncate2">
+            <h2>{{shop.name}}</h2>
+            <span class="city-deals-line">{{shop.address[1]}}</span>
+          </div>
+
+          <div class="col col-5 col-center">
+            <i class="icon ion-chevron-right col-center"></i>
+          </div>
+        </div>
+
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
