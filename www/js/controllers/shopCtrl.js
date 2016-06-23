@@ -11,7 +11,28 @@ function shopCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordova
 
   $scope.favory = false;
 
-  $scope.toggleFavorite = function() {
+  $scope.isFavorite = function(deal) {
+    if (dealsFactory.favorites.indexOf(deal) > -1)
+      return true;
+  };
+
+  $scope.toggleFavorite = function(deal) {
+    if ($scope.isFavorite(deal)) {
+      dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
+    } else {
+      if (dealsFactory.favorites.indexOf(deal._id) < 0) {
+        dealsFactory.favorites.push(deal);
+      }
+    }
+  };
+
+  $scope.removeFavorite = function(deal) {
+    dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
+  };
+
+  // Favorites deal
+
+  $scope.toggleFavoriteInDeal = function() {
     if ($scope.favory) {
       dealsFactory.favorites.splice(dealsFactory.favorites.indexOf($scope.dealsInShop1[$scope.activeIndex]), 1);
       $scope.favory = false;
@@ -23,7 +44,7 @@ function shopCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordova
     }
   };
 
-  $scope.isFavorite = function() {
+  $scope.isFavoriteInDeal = function() {
     if ($scope.dealsInShop1 && dealsFactory.favorites.indexOf($scope.dealsInShop1[$scope.activeIndex]) > -1) {
       $scope.favory = true;
     }
@@ -44,7 +65,7 @@ function shopCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordova
 
   $scope.$on("$ionicSlides.slideChangeEnd", function(event, data) {
     $scope.activeIndex = data.activeIndex;
-    $scope.isFavorite();
+    $scope.isFavoriteInDeal();
   });
 
   // Get deals in Shop
@@ -64,7 +85,7 @@ function shopCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordova
     for (var j = 0; j < $scope.dealsInShop1.length; j++) {
       if ($scope.dealsInShop1[j]._id == $stateParams.dealID) {
         $scope.activeIndex = j;
-        $scope.isFavorite();
+        $scope.isFavoriteInDeal();
         break;
       }
     }

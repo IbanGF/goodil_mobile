@@ -1,10 +1,32 @@
 function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordovaSocialSharing, dealsFactory) {
 
+
   // Favorites
+
+  $scope.isFavorite = function(deal) {
+    if (dealsFactory.favorites.indexOf(deal) > -1)
+      return true;
+  };
+
+  $scope.toggleFavorite = function(deal) {
+    if ($scope.isFavorite(deal)) {
+      dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
+    } else {
+      if (dealsFactory.favorites.indexOf(deal._id) < 0) {
+        dealsFactory.favorites.push(deal);
+      }
+    }
+  };
+
+  $scope.removeFavorite = function(deal) {
+    dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
+  };
+
+  // Favorites in deal
 
   $scope.favory = false;
 
-  $scope.toggleFavorite = function() {
+  $scope.toggleFavoriteInDeal = function() {
     if ($scope.favory) {
       dealsFactory.favorites.splice(dealsFactory.favorites.indexOf($scope.dealsInCategory[$scope.activeIndex]), 1);
       $scope.favory = false;
@@ -16,7 +38,7 @@ function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
     }
   };
 
-  $scope.isFavorite = function() {
+  $scope.isFavoriteInDeal = function() {
     if (dealsFactory.favorites.indexOf($scope.dealsInCategory[$scope.activeIndex]) > -1) {
       $scope.favory = true;
     }
@@ -36,7 +58,7 @@ function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
 
   $scope.$on("$ionicSlides.slideChangeEnd", function(event, data) {
     $scope.activeIndex = data.activeIndex;
-    $scope.isFavorite();
+    $scope.isFavoriteInDeal();
   });
 
   // Get selected category name
@@ -61,6 +83,8 @@ function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
   if ($stateParams.dealID) {
     for (var j = 0; j < $scope.dealsInCategory.length; j++) {
       if ($scope.dealsInCategory[j]._id == $stateParams.dealID) {
+        $scope.activeIndex = j;
+        $scope.isFavoriteInDeal();
         break;
       }
     }
