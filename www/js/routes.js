@@ -76,7 +76,7 @@ function routes($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
       views: {
         'tab-categories': {
           cache: false,
-          templateUrl: 'templates/tab-deal-map.html',
+          templateUrl: 'templates/tab-category-map.html',
           controller: 'mapCtrl'
         }
       }
@@ -113,7 +113,7 @@ function routes($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
       views: {
         'tab-shops': {
           cache: false,
-          templateUrl: 'templates/tab-deal-map.html',
+          templateUrl: 'templates/tab-shop-map.html',
           controller: 'mapCtrl'
         }
       }
@@ -141,7 +141,7 @@ function routes($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
       views: {
         'tab-favorites': {
           cache: false,
-          templateUrl: 'templates/tab-deal-map.html',
+          templateUrl: 'templates/tab-favorite-map.html',
           controller: 'mapCtrl'
         }
       }

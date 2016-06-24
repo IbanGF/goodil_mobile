@@ -1,4 +1,16 @@
-function dealsCtrl($scope, $state, dealsFactory, dealsService) {
+function dealsCtrl($scope, $state, $window, dealsFactory, dealsService) {
+  $window.localStorage.favories = $window.localStorage.favories || "[]";
+  dealsFactory.favorites = JSON.parse($window.localStorage.favories);
+
+
+  $scope.onRefresh = function() {
+    dealsService.getDeals()
+      .then(function(res) {
+        $scope.deals = res.data;
+        dealsFactory.deals = $scope.deals;
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+  };
 
   // Get All Deals
 
@@ -23,15 +35,18 @@ function dealsCtrl($scope, $state, dealsFactory, dealsService) {
   $scope.toggleFavorite = function(deal) {
     if ($scope.isFavorite(deal)) {
       dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
+      $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
     } else {
       if (dealsFactory.favorites.indexOf(deal._id) < 0) {
         dealsFactory.favorites.push(deal);
+        $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
       }
     }
   };
 
   $scope.removeFavorite = function(deal) {
     dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
+    $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
   };
 
   // Go to selected deal view

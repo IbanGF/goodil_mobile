@@ -1,7 +1,7 @@
 <ion-view view-title="{{categoryName}}" ng-class="loadingClass">
 
   <ion-nav-buttons side="secondary">
-    <button class="icon button button-clear" ng-class="{'ion-ios-star' : favory, 'ion-ios-star-outline' : !favory}" ng-click="toggleFavorite()"></button>
+    <button class="icon button button-clear" ng-class="{'ion-ios-star' : favory, 'ion-ios-star-outline' : !favory}" ng-click="toggleFavoriteInDeal()"></button>
     <button class="icon ion-ios-upload-outline button button-clear" ng-click="shareAnywhere()"></button>
   </ion-nav-buttons>
 
@@ -10,7 +10,7 @@
       <div class="deal-detail">
         <div class="deal-detail-top">
           <div class="deal-detail-main">
-            <div class="deal-detail-illustration" style="background: url('http://goodil.ibangf.ovh/{{deal.image}}') no-repeat; background-size: contain; background-position: center;" ng-click="openModal()"></div>
+            <div class="deal-detail-illustration" style="background: url('http://goodil.ibangf.ovh/{{deal.image}}') no-repeat; background-size: contain; background-position: center;" ng-click="openModal(deal)"></div>
             <div class="deal-detail-description">
               <h2>{{deal.name}}</h2>
               <p>{{deal.description}}</p>

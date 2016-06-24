@@ -1,4 +1,4 @@
-function dealCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordovaSocialSharing, dealsFactory) {
+function dealCtrl($scope, $state, $stateParams, $window, $ionicSlideBoxDelegate, $ionicModal, $cordovaSocialSharing, dealsFactory) {
 
   // Favorites
 
@@ -7,10 +7,12 @@ function dealCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordova
   $scope.toggleFavorite = function() {
     if ($scope.favory) {
       dealsFactory.favorites.splice(dealsFactory.favorites.indexOf($scope.dealsInShop[$scope.activeIndex]), 1);
+      $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
       $scope.favory = false;
     } else {
       if (dealsFactory.favorites.indexOf($scope.dealsInShop[$scope.activeIndex]._id) < 0) {
         dealsFactory.favorites.push($scope.dealsInShop[$scope.activeIndex]);
+        $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
         $scope.favory = true;
       }
     }
@@ -80,4 +82,23 @@ function dealCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordova
       reload: true
     });
   };
+
+  // Deal modal
+
+  $ionicModal.fromTemplateUrl('templates/modal-deal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    return $scope.modal = modal;
+  });
+
+  $scope.openModal = function(deal) {
+    $scope.deal = deal;
+    return $scope.modal.show();
+  };
+
+  $scope.closeModal = function() {
+    return $scope.modal.hide();
+  };
+
 }

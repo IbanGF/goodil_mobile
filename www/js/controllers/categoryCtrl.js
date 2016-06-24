@@ -1,4 +1,4 @@
-function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordovaSocialSharing, dealsFactory) {
+function categoryCtrl($scope, $state, $window, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $cordovaSocialSharing, dealsFactory) {
 
 
   // Favorites
@@ -11,15 +11,18 @@ function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
   $scope.toggleFavorite = function(deal) {
     if ($scope.isFavorite(deal)) {
       dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
+      $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
     } else {
       if (dealsFactory.favorites.indexOf(deal._id) < 0) {
         dealsFactory.favorites.push(deal);
+        $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
       }
     }
   };
 
   $scope.removeFavorite = function(deal) {
     dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
+    $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
   };
 
   // Favorites in deal
@@ -29,10 +32,12 @@ function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
   $scope.toggleFavoriteInDeal = function() {
     if ($scope.favory) {
       dealsFactory.favorites.splice(dealsFactory.favorites.indexOf($scope.dealsInCategory[$scope.activeIndex]), 1);
+      $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
       $scope.favory = false;
     } else {
       if (dealsFactory.favorites.indexOf($scope.dealsInCategory[$scope.activeIndex]._id) < 0) {
         dealsFactory.favorites.push($scope.dealsInCategory[$scope.activeIndex]);
+        $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
         $scope.favory = true;
       }
     }
@@ -116,4 +121,23 @@ function categoryCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
       reload: true
     });
   };
+
+  // Deal modal
+
+  $ionicModal.fromTemplateUrl('templates/modal-deal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    return $scope.modal = modal;
+  });
+
+  $scope.openModal = function(deal) {
+    $scope.deal = deal;
+    return $scope.modal.show();
+  };
+
+  $scope.closeModal = function() {
+    return $scope.modal.hide();
+  };
+
 }

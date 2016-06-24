@@ -1,4 +1,4 @@
-function favoriteCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cordovaSocialSharing, dealsFactory) {
+function favoriteCtrl($scope, $state, $window, $stateParams, $ionicModal, $ionicSlideBoxDelegate, $cordovaSocialSharing, dealsFactory) {
 
   // Favorites
 
@@ -7,6 +7,7 @@ function favoriteCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
 
   $scope.removeFavorite = function() {
     dealsFactory.favorites.splice(dealsFactory.favorites.indexOf($scope.dealsInShop[$scope.activeIndex]), 1);
+    $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
   };
 
   $scope.shareAnywhere = function() {
@@ -50,4 +51,23 @@ function favoriteCtrl($scope, $state, $stateParams, $ionicSlideBoxDelegate, $cor
       reload: true
     });
   };
+
+  // Deal modal
+
+  $ionicModal.fromTemplateUrl('templates/modal-deal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    return $scope.modal = modal;
+  });
+
+  $scope.openModal = function(deal) {
+    $scope.deal = deal;
+    return $scope.modal.show();
+  };
+
+  $scope.closeModal = function() {
+    return $scope.modal.hide();
+  };
+
 }
