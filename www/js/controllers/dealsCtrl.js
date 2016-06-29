@@ -1,6 +1,14 @@
 function dealsCtrl($scope, $state, $window, dealsFactory, dealsService) {
+
+  $scope.loading = false;
+
   $window.localStorage.favories = $window.localStorage.favories || "[]";
   dealsFactory.favorites = JSON.parse($window.localStorage.favories);
+
+
+  $window.localStorage.parameters = $window.localStorage.parameters || "{}";
+  dealsFactory.parameters = JSON.parse($window.localStorage.parameters);
+  $scope.selectedBassinDeVie = dealsFactory.parameters.selectedBassinDeVie.name;
 
 
   $scope.onRefresh = function() {
@@ -17,11 +25,13 @@ function dealsCtrl($scope, $state, $window, dealsFactory, dealsService) {
   if (dealsFactory.deals) {
     $scope.deals = dealsFactory.deals;
   } else {
-    dealsService.getDeals().then(function(res) {
+    $scope.loading = true;
+    dealsService.getDealsInBV(dealsFactory.parameters.selectedBassinDeVie._id).then(function(res) {
       console.log('deals');
       console.log(res.data);
       $scope.deals = res.data;
       dealsFactory.deals = $scope.deals;
+      $scope.loading = false;
     });
   }
 

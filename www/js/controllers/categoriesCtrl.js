@@ -1,14 +1,20 @@
 function categoriesCtrl($scope, $state, dealsService, dealsFactory) {
 
   // Get categories
+  $scope.selectedBassinDeVie = dealsFactory.parameters.selectedBassinDeVie.name;
 
   if (dealsFactory.categories) {
-    $scope.categories = dealsFactory.categories;
+    $scope.categoriesInBV = dealsFactory.categories;
   } else {
-    dealsService.getCategories().then(function(res) {
-      $scope.categories = res.data;
-      dealsFactory.categories = $scope.categories;
-    });
+    $scope.categoriesInBV = [];
+    for (var i = 0; i < dealsFactory.deals.length; i++) {
+      if ($scope.categoriesInBV.map(function(e) {
+          return e._id;
+        }).indexOf(dealsFactory.deals[i].subCategory.category._id) < 0) {
+        $scope.categoriesInBV.push(dealsFactory.deals[i].subCategory.category);
+      }
+    }
+    dealsFactory.categories = $scope.categoriesInBV;
   }
 
   // Go to selected category

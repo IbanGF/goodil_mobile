@@ -4,6 +4,7 @@ function dealsFactory() {
       deals : null,
       categories: null,
       shops: null,
+      parameters: {},
       favorites: []
     };
 }

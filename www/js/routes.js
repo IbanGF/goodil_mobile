@@ -145,6 +145,26 @@ function routes($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
           controller: 'mapCtrl'
         }
       }
+    })
+    .state('tab.params', {
+      url: '/params',
+      views: {
+        'tab-params': {
+          cache: false,
+          templateUrl: 'templates/params.html',
+          controller: 'paramsCtrl'
+        }
+      }
+    })
+    .state('tab.BVSelection', {
+      url: '/params',
+      views: {
+        'tab-params': {
+          cache: false,
+          templateUrl: 'templates/BVSelection.html',
+          controller: 'paramsCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback

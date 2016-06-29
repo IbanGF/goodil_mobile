@@ -1,7 +1,8 @@
-html, body, .percentage {
+/*html, body, .percentage {
   width: 100%;
   height: 100%;
-}
+}*/
+
 .truncate {
   width: 250px;
   white-space: nowrap;
@@ -16,6 +17,20 @@ html, body, .percentage {
 .deals-slider {
   margin-top: 44px;
   padding-bottom: 55px;
+}
+div.spinner {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 85px;
+  text-align: center;
+}
+.spinner svg {
+  width: 19% !important;
+  height: 85px !important;
 }
 
 /*deals*/

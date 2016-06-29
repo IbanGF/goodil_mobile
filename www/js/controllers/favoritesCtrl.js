@@ -9,18 +9,6 @@ function favoritesCtrl($scope, $state, $window, dealsFactory, dealsService) {
       return true;
   };
 
-  // $scope.toggleFavorite = function(deal) {
-  //   if ($scope.isFavorite(deal)) {
-  //     dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
-  //     $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
-  //   } else {
-  //     if (dealsFactory.favorites.indexOf(deal._id) < 0) {
-  //       dealsFactory.favorites.push(deal);
-  //       $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));
-  //     }
-  //   }
-  // };
-
   $scope.removeFavorite = function(deal) {
     dealsFactory.favorites.splice(dealsFactory.favorites.indexOf(deal), 1);
     $window.localStorage.setItem("favories", JSON.stringify(dealsFactory.favorites));

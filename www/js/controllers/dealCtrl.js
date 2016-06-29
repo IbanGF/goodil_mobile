@@ -27,7 +27,9 @@ function dealCtrl($scope, $state, $stateParams, $window, $ionicSlideBoxDelegate,
   // Share functions
 
   $scope.shareAnywhere = function() {
-    $cordovaSocialSharing.share("Description de l'offre " + $scope.shop.deals[0].name + ":" + $scope.shop.deals[0].description, "Partage de l'offre: " + $scope.shop.deals[0].name, 'http://goodil.ibangf.ovh/' + $scope.shop.deals[0].image, "Offre partagée via l'application GOODIL.Téléchargez l'application sur: http://www.goodil.fr");
+    $cordovaSocialSharing.shareViaEmail("Description de l'offre " + $scope.dealsInShop[$scope.activeIndex].name + ":" + $scope.dealsInShop[$scope.activeIndex].description, "Partage de l'offre: " + $scope.dealsInShop[$scope.activeIndex].name, '', '', '', $scope.dealsInShop[$scope.activeIndex].image);
+    $cordovaSocialSharing.shareViaTwitter("Description de l'offre " + $scope.dealsInShop[$scope.activeIndex].name + ":" + $scope.dealsInShop[$scope.activeIndex].description, "Partage de l'offre: " + $scope.dealsInShop[$scope.activeIndex].name, $scope.dealsInShop[$scope.activeIndex].image, 'http://www.goodil.fr');
+    // $cordovaSocialSharing.shareViaSMS("Description de l'offre " + $scope.dealsInShop[$scope.activeIndex].name + ":" + $scope.dealsInShop[$scope.activeIndex].description, "Partage de l'offre: " + $scope.dealsInShop[$scope.activeIndex].name);
   };
 
   // Slider

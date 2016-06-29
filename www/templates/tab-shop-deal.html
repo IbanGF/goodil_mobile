@@ -7,7 +7,7 @@
   <p ng-hide="dealsInShop1.length" class="deals-empty">Aucune offre pour le moment :(</p>
 
   <ion-slides slider="data.slider" show-pager="false" class="deals-slider">
-    <ion-slide-page ng-repeat="deal in dealsInShop1">
+    <ion-slide-page ng-repeat="deal in dealsInShop1 | orderBy:'name'">
       <div class="deal-detail">
         <div class="deal-detail-top">
           <div class="deal-detail-main">

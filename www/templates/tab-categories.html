@@ -1,9 +1,16 @@
 <ion-view view-title="Catégories" ng-class="loadingClass">
   <ion-content>
     <ion-refresher on-refresh="onRefresh()"></ion-refresher>
-    <p ng-hide="categories.length" class="deals-empty">Aucune offre pour le moment :(</p>
+    <p ng-hide="categories.length" class="center">
+      <div class="spinner">
+        <ion-spinner class="android"></ion-spinner>
+      </div>
+    </p>
+    <div class="item item-divider" style="text-align: center;">
+      {{selectedBassinDeVie}}
+    </div>
     <ion-list>
-      <ion-item class="category item-thumbnail-left item-icon-right" ng-repeat="category in categories" type="item" ng-click="goToTabCategory(category)" href>
+      <ion-item class="category item-thumbnail-left item-icon-right" ng-repeat="category in categoriesInBV | orderBy:'name'" type="item" ng-click="goToTabCategory(category)" href>
         <div class="row category-row">
 
           <div class="col col-20 col-center category-col-avatar">

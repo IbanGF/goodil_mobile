@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('goodil', ['ionic', 'ngCordova'])
+angular.module('goodil', ['ionic', 'ngCordova', 'ion-google-place'])
 
 //controllers//
 .controller('dealsCtrl', dealsCtrl)
@@ -17,6 +17,7 @@ angular.module('goodil', ['ionic', 'ngCordova'])
 .controller('favoritesCtrl', favoritesCtrl)
 .controller('favoriteCtrl', favoriteCtrl)
 .controller('mapCtrl', mapCtrl)
+.controller('paramsCtrl', paramsCtrl)
 
 //services//
 .service('dealsService', dealsService)

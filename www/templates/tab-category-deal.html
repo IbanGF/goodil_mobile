@@ -6,7 +6,7 @@
   </ion-nav-buttons>
 
   <ion-slides slider="data.slider" show-pager="false" class="deals-slider">
-    <ion-slide-page ng-repeat="deal in dealsInCategory">
+    <ion-slide-page ng-repeat="deal in dealsInCategory | orderBy:'name'">
       <div class="deal-detail">
         <div class="deal-detail-top">
           <div class="deal-detail-main">

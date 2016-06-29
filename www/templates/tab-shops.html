@@ -1,9 +1,20 @@
 <ion-view view-title="Magasins" ng-class="loadingClass">
   <ion-content>
     <ion-refresher on-refresh="onRefresh()"></ion-refresher>
-    <p ng-hide="shops.length" class="deals-empty">Aucune offre pour le moment :(</p>
+    <p ng-show="loading" class="center">
+      <div class="spinner">
+        <ion-spinner class="android"></ion-spinner>
+      </div>
+    </p>
+    <p ng-hide="shops.length || loading" class="center">
+      Aucunne enseigne n'a posté d'offres pour le moment.
+    </p>
+
+    <div class="item item-divider" style="text-align: center;">
+      {{selectedBassinDeVie}}
+    </div>
     <ion-list>
-      <ion-item class="category item-thumbnail-left item-icon-right" ng-repeat="shop in shops" type="item" ng-click="goToTabShop(shop)" href>
+      <ion-item class="category item-thumbnail-left item-icon-right" ng-repeat="shop in shops | orderBy:'name'" type="item" ng-click="goToTabShop(shop)" href>
         <div class="row category-row">
 
           <div class="col col-20 col-center category-col-avatar">

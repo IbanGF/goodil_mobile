@@ -1,9 +1,11 @@
 <ion-view view-title="Favories" ng-class="loadingClass">
   <ion-content>
     <ion-refresher on-refresh="onRefresh()"></ion-refresher>
-    <p ng-hide="favorites.length" class="deals-empty">Aucune offres dans les favoris pour le moment :(</p>
+    <p ng-hide="favorites.length" class="center">
+      Voun n'avez aucunne offres en favoris pour le moment.
+    </p>
     <ion-list>
-      <ion-item class="deal item-thumbnail-left item-icon-right" ng-repeat="deal in favorites" type="item" ng-click="goToDeal(deal)" href>
+      <ion-item class="deal item-thumbnail-left item-icon-right" ng-repeat="deal in favorites | orderBy:'name'" type="item" ng-click="goToDeal(deal)" href>
         <div class="row">
 
           <div class="col col-40 col-center deal-col-brand-avatar">

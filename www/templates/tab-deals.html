@@ -1,7 +1,18 @@
-<ion-view view-title="Offres" ng-class="loadingClass">
+<ion-view view-title="Offres">
   <ion-content>
     <ion-refresher on-refresh="onRefresh()"></ion-refresher>
-    <p ng-hide="deals.length" class="deals-empty">Aucune offre pour le moment :(</p>
+    <p ng-show="loading" class="center">
+      <div class="spinner">
+        <ion-spinner class="android"></ion-spinner>
+      </div>
+    </p>
+    <p ng-hide="deals.length || loading" class="center">
+      Aucunne offres pour le moment.
+    </p>
+
+    <div class="item item-divider" style="text-align: center;">
+      {{selectedBassinDeVie}}
+    </div>
     <ion-list>
       <ion-item class="deal item-thumbnail-left item-icon-right" ng-repeat="deal in deals" type="item" ng-click="goToDeal(deal)" href>
         <div class="row">
@@ -16,7 +27,6 @@
               <img class="category-avatar" ng-src="http://goodil.ibangf.ovh/{{deal.subCategory.category.logo}}">
             </div>
           </div>
-
 
           <div class="col col-50 col-offset-10 deal-description-col">
             <h2>{{deal.name}}</h2>

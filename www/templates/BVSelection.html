@@ -1,0 +1,23 @@
+<ion-view view-title="Bassin de vie">
+  <ion-content>
+
+    <div class="item item-divider">
+      Votre adresse
+    </div>
+    <div class="item item-input controls">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input id="address-input" type="text" placeholder="Entrez votre adresse" data-tap-disabled="true" ng-model="address">
+    </div>
+
+    <div class="item item-divider">
+      Choisir un bassin de vie
+    </div>
+    <div class="item item-input controls">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Rechercher un bassin de vie" ng-model="searchBV">
+    </div>
+    <ion-list>
+      <ion-radio ng-repeat="bassinDeVie in bassinDeVies | filter: searchBV" ng-click="selectBassinDeVie(bassinDeVie)">{{bassinDeVie.name}}</ion-radio>
+    </ion-list>
+  </ion-content>
+</ion-view>
